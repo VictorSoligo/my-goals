@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import { client } from '@/lib/drizzle'
 import migrations from './drizzle/migrations/migrations'
+import { poc } from './src/poc'
 import './src/styles/global.css'
 
 export default function App() {
@@ -18,11 +19,15 @@ export default function App() {
     return <Text>Migrating...</Text>
   }
 
+  function handlePress() {
+    poc()
+  }
+
   return (
     <GluestackUIProvider>
       <View className="flex-1 items-center justify-center bg-white">
-        <Button variant="outline">
-          <Text>Login</Text>
+        <Button variant="outline" onPress={handlePress}>
+          <Text>Exercicios</Text>
         </Button>
 
         <StatusBar style="auto" />
