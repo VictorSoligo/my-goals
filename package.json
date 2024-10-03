@@ -6,23 +6,28 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@gluestack-ui/button": "^1.0.7",
     "@gluestack-ui/nativewind-utils": "^1.0.24",
-    "expo": "~51.0.28",
+    "babel-plugin-inline-import": "^3.0.0",
+    "drizzle-orm": "^0.33.0",
+    "expo": "~51.0.36",
+    "expo-sqlite": "~14.0.6",
     "expo-status-bar": "~1.12.1",
     "nativewind": "4.0.36",
     "react": "18.2.0",
     "react-native": "0.74.5",
     "react-native-reanimated": "~3.10.1",
-    "react-native-svg": "^15.7.1"
+    "react-native-svg": "15.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/react": "~18.2.45",
+    "drizzle-kit": "^0.24.2",
     "eslint": "^8.57.0",
     "tailwindcss": "^3.4.13",
     "typescript": "~5.3.3"
