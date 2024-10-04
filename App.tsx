@@ -1,15 +1,16 @@
-import { StatusBar } from 'expo-status-bar'
-import { Text, TextInput, View } from 'react-native'
-import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
 import { Button } from '@/components/ui/button'
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
+import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
+import { FetchExercisesUseCase } from '@/gym/application/use-cases/fetch-exercises'
+import { DrizzleExercisesDao } from '@/infra/database/drizzle/daos/drizzle-exercises-dao'
+import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
 import { client } from '@/lib/drizzle'
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { StatusBar } from 'expo-status-bar'
+import { useState } from 'react'
+import { Text, TextInput, View } from 'react-native'
 import migrations from './drizzle/migrations/migrations'
 import './src/styles/global.css'
-import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
-import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
-import { useState } from 'react'
-import { exercises } from './drizzle/schema'
 
 export default function App() {
   const [name, setName] = useState('')
@@ -35,9 +36,12 @@ export default function App() {
 
     setName('')
 
-    const list = client.select().from(exercises).all()
+    const drizzleExercisesDao = new DrizzleExercisesDao()
+    const fetchExercisesUseCase = new FetchExercisesUseCase(drizzleExercisesDao)
 
-    console.log(list)
+    const result = await fetchExercisesUseCase.execute({ page: 1, perPage: 10 })
+
+    console.log(result.value)
   }
 
   return (
