@@ -1,18 +1,18 @@
-import { Button } from '@/components/ui/button'
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
-import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
-import { FetchExercisesUseCase } from '@/gym/application/use-cases/fetch-exercises'
-import { DrizzleExercisesDao } from '@/infra/database/drizzle/daos/drizzle-exercises-dao'
-import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
-import { client } from '@/lib/drizzle'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
-import { StatusBar } from 'expo-status-bar'
 import { useState } from 'react'
+import migrations from '../../drizzle/migrations/migrations'
+import { client } from '@/lib/drizzle'
 import { Text, TextInput, View } from 'react-native'
-import migrations from './drizzle/migrations/migrations'
-import './src/styles/global.css'
+import { Button } from '@/components/ui/button'
+import { StatusBar } from 'expo-status-bar'
+import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
+import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
+import { DrizzleExercisesDao } from '@/infra/database/drizzle/daos/drizzle-exercises-dao'
+import { FetchExercisesUseCase } from '@/gym/application/use-cases/fetch-exercises'
+import '../styles/global.css'
 
-export default function App() {
+export default function RootLayout() {
   const [name, setName] = useState('')
 
   const { success, error } = useMigrations(client, migrations)
