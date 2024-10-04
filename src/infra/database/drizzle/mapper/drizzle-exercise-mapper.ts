@@ -19,7 +19,7 @@ export class DrizzleExerciseMapper {
     return {
       id: exercise.id.toString(),
       name: exercise.name,
-      createdAt: exercise.createdAt.toJSON(),
+      createdAt: exercise.createdAt.getTime(),
     }
   }
 }

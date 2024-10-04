@@ -2,7 +2,7 @@ import { PaginationParams } from '@/core/data/pagination-params'
 import { ExercisesDao } from '@/gym/application/daos/exercises-dao'
 import { client } from '@/lib/drizzle'
 import { exercises as sqliteExercises } from '../../../../../drizzle/schema'
-import { sql } from 'drizzle-orm'
+import { desc, sql } from 'drizzle-orm'
 import { DrizzleEssentialExerciseMapper } from '../mapper/drizzle-essential-exercise-mapper'
 
 export class DrizzleExercisesDao implements ExercisesDao {
@@ -14,6 +14,7 @@ export class DrizzleExercisesDao implements ExercisesDao {
       .from(sqliteExercises)
       .limit(perPage)
       .offset(skip)
+      .orderBy(desc(sqliteExercises.createdAt))
       .all()
 
     const totalCountQuery = client

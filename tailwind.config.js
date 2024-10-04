@@ -2,7 +2,7 @@ const gluestackPlugin = require('@gluestack-ui/nativewind-utils/tailwind-plugin'
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['App.tsx', './src/**/*.tsx'],
+  content: ['./src/**/*.tsx'],
   presets: [require('nativewind/preset')],
   safelist: [
     {

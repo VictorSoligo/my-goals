@@ -1,14 +1,14 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
 
 export const exercises = sqliteTable('exercises', {
   id: text('id').primaryKey(),
   name: text('name').unique().notNull(),
-  createdAt: text('created_at').notNull(),
+  createdAt: integer('created_at').notNull(),
 })
 
 export const sessions = sqliteTable('sessions', {
   id: text('id').primaryKey(),
-  createdAt: text('created_at').notNull(),
+  createdAt: integer('created_at').notNull(),
 })
 
 export const sessionsExercises = sqliteTable('sessions_exercises', {
