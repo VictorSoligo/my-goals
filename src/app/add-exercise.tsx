@@ -9,6 +9,7 @@ import { useState } from 'react'
 
 export default function AddExerciseScreen() {
   const [name, setName] = useState('')
+  const [category, setCategory] = useState('')
 
   const router = useRouter()
   const { mutateAsync } = useCreateExercise()
@@ -18,11 +19,12 @@ export default function AddExerciseScreen() {
       return
     }
 
-    await mutateAsync({ name })
+    await mutateAsync({ name, category })
 
     router.dismiss()
 
     setName('')
+    setCategory('')
   }
 
   return (
@@ -31,8 +33,17 @@ export default function AddExerciseScreen() {
         <Input variant="outline">
           <InputField
             autoFocus
-            placeholder="Nome"
+            placeholder="Name"
+            value={name}
             onChangeText={(value) => setName(value)}
+          />
+        </Input>
+
+        <Input variant="outline">
+          <InputField
+            placeholder="Category"
+            value={category}
+            onChangeText={(value) => setCategory(value)}
           />
         </Input>
 

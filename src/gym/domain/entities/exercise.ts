@@ -4,12 +4,17 @@ import { Optional } from '@/core/types/optional'
 
 export interface ExerciseProps {
   name: string
+  category: string
   createdAt: Date
 }
 
 export class Exercise extends Entity<ExerciseProps> {
   get name() {
     return this.props.name
+  }
+
+  get category() {
+    return this.props.category
   }
 
   get createdAt() {

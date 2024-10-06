@@ -7,6 +7,7 @@ export class DrizzleExerciseMapper {
     const exercise = Exercise.create(
       {
         name: raw.name,
+        category: raw.category,
         createdAt: new Date(raw.createdAt),
       },
       new UniqueEntityID(raw.id),
@@ -18,6 +19,7 @@ export class DrizzleExerciseMapper {
   static toPersistence(exercise: Exercise): typeof exercises.$inferInsert {
     return {
       id: exercise.id.toString(),
+      category: exercise.category,
       name: exercise.name,
       createdAt: exercise.createdAt.getTime(),
     }

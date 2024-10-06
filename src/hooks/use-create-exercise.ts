@@ -1,19 +1,11 @@
-import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
-import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
+import { createExercise } from '@/data/create-exercise'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export function useCreateExercise() {
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: async ({ name }: { name: string }) => {
-      const drizzleExercisesRepository = new DrizzleExercisesRepository()
-      const createExerciseUseCase = new CreateExerciseUseCase(
-        drizzleExercisesRepository,
-      )
-
-      await createExerciseUseCase.execute({ name })
-    },
+    mutationFn: createExercise,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['exercises'] })
     },

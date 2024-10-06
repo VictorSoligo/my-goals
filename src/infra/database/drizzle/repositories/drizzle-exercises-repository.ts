@@ -26,6 +26,7 @@ export class DrizzleExercisesRepository implements ExercisesRepository {
     await client.insert(exercises).values({
       id: data.id,
       name: data.name,
+      category: data.category,
       createdAt: data.createdAt,
     })
   }

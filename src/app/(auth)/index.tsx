@@ -8,7 +8,7 @@ export default function ExercisesScreen() {
   return (
     <Screen title="Exercises">
       <Box className="flex-row items-center justify-between mb-8">
-        <Text size="xl">Exercises</Text>
+        <Text size="xl">Exercises list</Text>
 
         <AddExerciseButton />
       </Box>

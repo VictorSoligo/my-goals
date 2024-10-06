@@ -27,7 +27,7 @@ export function ExerciseList() {
               <Text size="md">{item.name}</Text>
 
               <Text size="sm" className="text-typography-600">
-                Peito
+                {item.category}
               </Text>
             </Box>
 

@@ -6,6 +6,7 @@ export class DrizzleEssentialExerciseMapper {
     return {
       id: raw.id,
       name: raw.name,
+      category: raw.category,
       createdAt: new Date(raw.createdAt),
     }
   }

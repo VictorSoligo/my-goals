@@ -5,7 +5,7 @@ export async function fetchExercises() {
   const drizzleExercisesDao = new DrizzleExercisesDao()
   const fetchExercisesUseCase = new FetchExercisesUseCase(drizzleExercisesDao)
 
-  const result = await fetchExercisesUseCase.execute({ page: 1, perPage: 10 })
+  const result = await fetchExercisesUseCase.execute({ page: 1, perPage: 20 })
 
   if (result.isLeft()) {
     return { error: result.value }
