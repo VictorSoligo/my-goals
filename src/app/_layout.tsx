@@ -1,20 +1,16 @@
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider'
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
-import { useState } from 'react'
-import migrations from '../../drizzle/migrations/migrations'
 import { client } from '@/lib/drizzle'
-import { Text, TextInput, View } from 'react-native'
-import { Button } from '@/components/ui/button'
+import { queryClient } from '@/lib/query-client'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { Stack } from 'expo-router'
+import { Text } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { DrizzleExercisesRepository } from '@/infra/database/drizzle/repositories/drizzle-exercises-repository'
-import { CreateExerciseUseCase } from '@/gym/application/use-cases/create-exercise'
-import { DrizzleExercisesDao } from '@/infra/database/drizzle/daos/drizzle-exercises-dao'
-import { FetchExercisesUseCase } from '@/gym/application/use-cases/fetch-exercises'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import migrations from '../../drizzle/migrations/migrations'
 import '../styles/global.css'
 
 export default function RootLayout() {
-  const [name, setName] = useState('')
-
   const { success, error } = useMigrations(client, migrations)
 
   if (error) {
@@ -25,41 +21,22 @@ export default function RootLayout() {
     return <Text>Migrating...</Text>
   }
 
-  async function handlePress() {
-    const drizzleExercisesRepository = new DrizzleExercisesRepository()
-
-    const createExerciseUseCase = new CreateExerciseUseCase(
-      drizzleExercisesRepository,
-    )
-
-    await createExerciseUseCase.execute({ name })
-
-    setName('')
-
-    const drizzleExercisesDao = new DrizzleExercisesDao()
-    const fetchExercisesUseCase = new FetchExercisesUseCase(drizzleExercisesDao)
-
-    const result = await fetchExercisesUseCase.execute({ page: 1, perPage: 10 })
-
-    console.log(result.value)
-  }
-
   return (
-    <GluestackUIProvider>
-      <View className="flex-1 items-center justify-center bg-white">
-        <TextInput
-          placeholder="Name"
-          className="border p-2 w-[200px] mb-4"
-          value={name}
-          onChangeText={(v) => setName(v)}
-        />
+    <SafeAreaProvider>
+      <QueryClientProvider client={queryClient}>
+        <GluestackUIProvider>
+          <Stack>
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
 
-        <Button variant="outline" onPress={handlePress}>
-          <Text>Cadastrar</Text>
-        </Button>
+            <Stack.Screen
+              name="add-exercise"
+              options={{ headerShown: false }}
+            />
+          </Stack>
 
-        <StatusBar style="auto" />
-      </View>
-    </GluestackUIProvider>
+          <StatusBar style="light" backgroundColor="#303956" />
+        </GluestackUIProvider>
+      </QueryClientProvider>
+    </SafeAreaProvider>
   )
 }

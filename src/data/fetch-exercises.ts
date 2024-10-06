@@ -1,7 +1,7 @@
 import { FetchExercisesUseCase } from '@/gym/application/use-cases/fetch-exercises'
 import { DrizzleExercisesDao } from '@/infra/database/drizzle/daos/drizzle-exercises-dao'
 
-export async function getExercises() {
+export async function fetchExercises() {
   const drizzleExercisesDao = new DrizzleExercisesDao()
   const fetchExercisesUseCase = new FetchExercisesUseCase(drizzleExercisesDao)
 
