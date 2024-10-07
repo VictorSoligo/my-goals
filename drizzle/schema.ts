@@ -16,6 +16,10 @@ export const sessionsExercises = sqliteTable('sessions_exercises', {
   id: text('id').primaryKey(),
   weight: integer('weight').notNull(),
   reps: integer('reps').notNull(),
-  exerciseId: text('exercise_id').references(() => exercises.id),
-  sessionId: text('session_id').references(() => sessions.id),
+  exerciseId: text('exercise_id')
+    .references(() => exercises.id)
+    .notNull(),
+  sessionId: text('session_id')
+    .references(() => sessions.id)
+    .notNull(),
 })
