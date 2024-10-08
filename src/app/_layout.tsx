@@ -32,6 +32,8 @@ export default function RootLayout() {
               name="add-exercise"
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen name="add-session" options={{ headerShown: false }} />
           </Stack>
 
           <StatusBar style="light" backgroundColor="#303956" />

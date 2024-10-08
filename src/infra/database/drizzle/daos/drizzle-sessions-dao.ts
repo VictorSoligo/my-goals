@@ -38,7 +38,7 @@ export class DrizzleSessionsDao implements SessionsDao {
             exerciseName: exercises.name,
           })
           .from(sqliteSessionsExercises)
-          .where(eq(sqliteSessions.id, session.id))
+          .where(eq(sqliteSessionsExercises.sessionId, session.id))
           .innerJoin(
             exercises,
             eq(sqliteSessionsExercises.exerciseId, exercises.id),
