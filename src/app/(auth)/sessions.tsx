@@ -8,7 +8,7 @@ export default function SessionsScreen() {
   return (
     <Screen title="Sessions">
       <Box className="flex-row items-center justify-between mb-8">
-        <Text size="xl">Sessions list</Text>
+        <Text size="xl">Session list</Text>
 
         <AddSessionButton />
       </Box>

@@ -7,6 +7,7 @@ import { useFetchExercises } from '@/hooks/use-fetch-exercises'
 import { useState } from 'react'
 import { Picker } from '@react-native-picker/picker'
 import { useCreateSession } from '@/hooks/use-create-session'
+import { useRouter } from 'expo-router'
 
 interface Exercise {
   weight: string
@@ -23,6 +24,7 @@ export default function AddSessionScreen() {
 
   const userExercises = data?.exercises ?? []
 
+  const router = useRouter()
   const { mutateAsync } = useCreateSession()
 
   function onExerciseChange(
@@ -55,6 +57,10 @@ export default function AddSessionScreen() {
       return
     }
 
+    if (exercises.some((exercise) => !exercise.exerciseId)) {
+      return
+    }
+
     await mutateAsync({
       exercises: exercises.map((exercise) => {
         return {
@@ -66,6 +72,8 @@ export default function AddSessionScreen() {
     })
 
     setExercises([{ reps: '', weight: '', exerciseId: '' }])
+
+    router.dismiss()
   }
 
   return (

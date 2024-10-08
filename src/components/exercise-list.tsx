@@ -15,7 +15,7 @@ export function ExerciseList() {
       <FlatList
         data={exercises ?? []}
         keyExtractor={(item) => item.id}
-        ListEmptyComponent={() => <Text>Vazio</Text>}
+        ListEmptyComponent={() => <Text>Create new exercises</Text>}
         ItemSeparatorComponent={() => <Box className="h-4" />}
         renderItem={({ item }) => (
           <Card

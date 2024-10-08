@@ -15,7 +15,7 @@ export function SessionList() {
       <FlatList
         data={sessions ?? []}
         keyExtractor={(item) => item.id}
-        ListEmptyComponent={() => <Text>Vazio</Text>}
+        ListEmptyComponent={() => <Text>Create new sessions</Text>}
         ItemSeparatorComponent={() => <Box className="h-4" />}
         renderItem={({ item }) => (
           <Card variant="outline" size="sm">
@@ -36,7 +36,7 @@ export function SessionList() {
                     <Text>{exerciseName}</Text>
 
                     <Text>
-                      {weight}kg x {reps}
+                      {weight} kg x {reps}
                     </Text>
                   </Box>
                 ),

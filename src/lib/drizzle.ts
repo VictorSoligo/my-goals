@@ -1,7 +1,5 @@
 import { drizzle } from 'drizzle-orm/expo-sqlite'
-import { openDatabaseSync, deleteDatabaseSync } from 'expo-sqlite/next'
-
-deleteDatabaseSync('mygoals.db')
+import { openDatabaseSync } from 'expo-sqlite/next'
 
 const expo = openDatabaseSync('mygoals.db')
 
